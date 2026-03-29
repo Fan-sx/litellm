@@ -1,0 +1,23 @@
+model_list:
+  # Cloudflare Workers AI - Kimi K2.5（安全写法）
+  - model_name: kimi-k2.5
+    litellm_params:
+      model: "@cf/moonshotai/kimi-k2.5"
+      api_base: "https://api.cloudflare.com/client/v4/accounts/9208185722c1d6c5bd8366a4de400ccf/ai/v1"
+      api_key: "os.environ/CLOUDFLARE_API_KEY"     # ← 改成这样！
+  - model_name: glm-4.7-flash
+    litellm_params:
+      model: "@cf/zai-org/glm-4.7-flash"
+      api_base: "https://api.cloudflare.com/client/v4/accounts/9208185722c1d6c5bd8366a4de400ccf/ai/v1"
+      api_key: "os.environ/CLOUDFLARE_API_KEY"   
+  # 如果以后加更多 CF 账号，可以这样写
+  # - model_name: llama-3.1-8b
+  #   litellm_params:
+  #     model: "@cf/meta/llama-3.1-8b-instruct"
+  #     api_base: "https://api.cloudflare.com/client/v4/accounts/你的account_id/ai/v1"
+  #     api_key: "os.environ/CLOUDFLARE_API_KEY"
+
+
+router_settings:
+  routing_strategy: "simple-shuffle"
+  fallback: true
